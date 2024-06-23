@@ -2,7 +2,7 @@ import { todos } from '@/db/schema';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import assert from 'assert';
 import { eq } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { drizzle } from 'drizzle-orm/d1';
 import { Hono } from 'hono';
 
 export const runtime = 'edge';
@@ -33,7 +33,7 @@ const routes = app
   .put('/todos/:id', async (c) => {
     const id = parseInt(c.req.param('id'));
     assert(!isNaN(id));
-    const params = await c.req.json<typeof todos.$inferSelect>();
+    const params = await c.req.json<typeof todos.$inferInsert>();
     const db = drizzle(c.env.DB);
     const result = await db
       .update(todos)
@@ -53,3 +53,9 @@ const routes = app
 export type AppType = typeof routes;
 
 export const GET = handle(app);
+
+export const POST = handle(app);
+
+export const PUT = handle(app);
+
+export const DELETE = handle(app);
