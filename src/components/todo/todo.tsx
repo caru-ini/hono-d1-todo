@@ -30,7 +30,7 @@ export const Todo = ({
       <div className='flex items-center space-x-2 p-3' onClick={() => setCompleted(id, !completed)}>
         <Checkbox
           checked={completed}
-          onClick={() => {
+          onChange={() => {
             setCompleted(id, !completed);
           }}
         />
