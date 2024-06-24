@@ -55,3 +55,9 @@ const routes = app
 export type AppType = typeof routes;
 
 export const GET = _handle(app);
+
+export const POST = _handle(app);
+
+export const PUT = _handle(app);
+
+export const DELETE = _handle(app);
