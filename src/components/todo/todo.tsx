@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { Trash } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
@@ -33,7 +34,7 @@ export const Todo = ({
             setCompleted(id, !completed);
           }}
         />
-        <p className='text-lg'>{text}</p>
+        <p className={clsx('text-lg', completed && 'line-through')}>{text}</p>
       </div>
       <div className='flex items-center pr-2'>
         {editable && (
