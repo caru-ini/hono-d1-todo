@@ -1,5 +1,4 @@
 import { todos } from '@/db/schema';
-import assert from 'assert';
 import { eq } from 'drizzle-orm';
 import { drizzle, type DrizzleD1Database } from 'drizzle-orm/d1';
 import { Hono } from 'hono';
@@ -36,8 +35,7 @@ const routes = app
   })
   .put('/todos/:id', async (c) => {
     const id = parseInt(c.req.param('id'));
-    assert(!isNaN(id));
-    const params = await c.req.json<typeof todos.$inferInsert>();
+    const params = await c.req.json<typeof todos.$inferSelect>();
     const result = await c.var.db
       .update(todos)
       .set({ text: params.text, done: params.done })
@@ -47,7 +45,6 @@ const routes = app
   })
   .delete('/todos/:id', async (c) => {
     const id = parseInt(c.req.param('id'));
-    assert(!isNaN(id));
     const result = await c.var.db.delete(todos).where(eq(todos.id, id)).execute();
     return c.json(result);
   });

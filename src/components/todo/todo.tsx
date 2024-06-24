@@ -7,38 +7,35 @@ import { Checkbox } from '../ui/checkbox';
 
 export interface TodoProps {
   text: string;
-  completed: boolean;
-  id: string;
+  done: boolean;
+  id: number;
 }
 
 interface TodoItemProps extends TodoProps {
-  setCompleted: (id: string, completed: boolean) => void;
-  removeTodo: (id: string) => void;
+  setDone: (id: number, done: boolean) => Promise<void>;
+  removeTodo: (id: number) => Promise<void>;
   editable: boolean;
 }
 
-export const Todo = ({
-  text,
-  completed,
-  id,
-  setCompleted,
-  removeTodo,
-  editable,
-}: TodoItemProps) => {
+export const Todo = ({ text, done, id, setDone, removeTodo, editable }: TodoItemProps) => {
   return (
     <div className='flex items-center justify-between space-x-4 rounded-sm bg-secondary/50 shadow-sm'>
-      <div className='flex items-center space-x-2 p-3' onClick={() => setCompleted(id, !completed)}>
+      <div className='flex items-center space-x-2 p-3' onClick={async () => setDone(id, !done)}>
         <Checkbox
-          checked={completed}
-          onChange={() => {
-            setCompleted(id, !completed);
+          checked={done}
+          onChange={async () => {
+            setDone(id, !done);
           }}
         />
-        <p className={clsx('text-lg', completed && 'line-through')}>{text}</p>
+        <p className={clsx('text-lg', done && 'line-through')}>{text}</p>
       </div>
       <div className='flex items-center pr-2'>
         {editable && (
-          <Button variant='ghost' className='rounded-full' onClick={() => removeTodo(id)}>
+          <Button
+            variant='ghost'
+            className='rounded-full'
+            onClick={async () => await removeTodo(id)}
+          >
             <Trash size={20} />
           </Button>
         )}

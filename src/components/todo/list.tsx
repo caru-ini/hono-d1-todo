@@ -1,41 +1,10 @@
 'use client';
-import { useState } from 'react';
-import { ulid } from 'ulid';
+import useTodos from '@/hooks/useTodos';
 import { TodoControl } from './control';
-import { Todo, TodoProps } from './todo';
+import { Todo } from './todo';
 
 export const TodoList = () => {
-  const [todos, setTodos] = useState<TodoProps[]>([
-    { text: 'Learn Next.js', completed: false, id: ulid() },
-    { text: 'Learn Tailwind CSS', completed: false, id: ulid() },
-    { text: 'Build a Todo App', completed: false, id: ulid() },
-  ]);
-
-  const [editable, setEditable] = useState<boolean>(false);
-
-  const addTodo = (text: string) => {
-    if (!text) return;
-    setTodos((prev) => [...prev, { text, completed: false, id: ulid() }]);
-  };
-
-  const setCompleted = (id: string, completed: boolean) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed };
-        }
-        return todo;
-      }),
-    );
-  };
-
-  const removeTodo = (id: string) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  };
-
-  const reset = () => {
-    setTodos([]);
-  };
+  const { todos, editable, setEditable, addTodo, setDone, removeTodo, reset } = useTodos();
 
   return (
     <div className='flex max-h-[800px] min-w-[30vw] flex-col gap-2 overflow-y-auto rounded-xl border border-border p-5 shadow-md'>
@@ -44,7 +13,7 @@ export const TodoList = () => {
         <Todo
           key={todo.id}
           {...todo}
-          setCompleted={setCompleted}
+          setDone={setDone}
           removeTodo={removeTodo}
           editable={editable}
         />
