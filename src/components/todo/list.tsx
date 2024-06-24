@@ -38,7 +38,7 @@ export const TodoList = () => {
   };
 
   return (
-    <div className='flex flex-col border border-border rounded-xl p-5 gap-2 shadow-md min-w-[30vw] max-h-[800px] overflow-y-auto'>
+    <div className='flex max-h-[800px] min-w-[30vw] flex-col gap-2 overflow-y-auto rounded-xl border border-border p-5 shadow-md'>
       <TodoControl addTodo={addTodo} reset={reset} setEditable={setEditable} editable={editable} />
       {todos.map((todo) => (
         <Todo

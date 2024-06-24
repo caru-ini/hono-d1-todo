@@ -5,11 +5,9 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
-    "plugin:eslint-plugin-next-on-pages/recommended",
-    "prettier"
+    "plugin:eslint-plugin-next-on-pages/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 12,

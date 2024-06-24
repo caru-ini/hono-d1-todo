@@ -28,7 +28,7 @@ export const TodoControl = ({ addTodo, reset, setEditable, editable }: TodoContr
   };
   return (
     <div className='flex flex-col items-center gap-x-4 rounded-sm p-2'>
-      <form onSubmit={onSubmit} className='flex items-center w-full'>
+      <form onSubmit={onSubmit} className='flex w-full items-center'>
         <Input
           type='text'
           value={newTodo}
@@ -44,17 +44,17 @@ export const TodoControl = ({ addTodo, reset, setEditable, editable }: TodoContr
         <AccordionItem value='options'>
           <AccordionTrigger
             onClick={() => setShowOptions((prev) => !prev)}
-            className='flex justify-end text-muted-foreground p-1'
+            className='flex justify-end p-1 text-muted-foreground'
           >
             Options
           </AccordionTrigger>
           <AccordionContent>
-            <div className='flex gap-2 justify-evenly items-center space-x-4 mt-1 w-full'>
+            <div className='mt-1 flex w-full items-center justify-evenly gap-2 space-x-4'>
               <label htmlFor='editable' className='flex items-center gap-2'>
                 Edit Mode
                 <Switch checked={editable} onCheckedChange={() => setEditable((prev) => !prev)} />
               </label>
-              <Button variant={'ghost'} className='p-1 w-8 h-8' onClick={reset}>
+              <Button variant={'ghost'} className='size-8 p-1' onClick={reset}>
                 <RotateCcw size={16} />
               </Button>
             </div>

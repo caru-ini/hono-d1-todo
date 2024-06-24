@@ -25,7 +25,7 @@ export const Todo = ({
   editable,
 }: TodoItemProps) => {
   return (
-    <div className='flex items-center space-x-4 bg-secondary/50 rounded-sm shadow-sm justify-between'>
+    <div className='flex items-center justify-between space-x-4 rounded-sm bg-secondary/50 shadow-sm'>
       <div className='flex items-center space-x-2 p-3'>
         <Checkbox
           checked={completed}
