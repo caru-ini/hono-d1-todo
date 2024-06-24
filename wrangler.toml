@@ -5,7 +5,9 @@ pages_build_output_dir = ".vercel/output/static"
 
 [[d1_databases]]
 binding = "DB" # i.e. available in your Worker on env.DB
-database_name = "${DATABASE_NAME}"
-database_id = "${DATABASE_ID}"
+database_name = "sample-todo"
+database_id = "bb5a0e4e-2e86-4da4-b94f-14fa115de6c3"
 migrations_dir = "drizzle/migrations"
+
+
 
