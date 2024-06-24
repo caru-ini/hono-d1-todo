@@ -1,40 +1,66 @@
 'use client';
-import { Pencil } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { RotateCcw } from 'lucide-react';
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 
 interface TodoControlProps {
   addTodo: (text: string) => void;
   reset: () => void;
   setEditable: React.Dispatch<React.SetStateAction<boolean>>;
+  editable: boolean;
 }
 
-export const TodoControl = ({ addTodo, reset, setEditable }: TodoControlProps) => {
+export const TodoControl = ({ addTodo, reset, setEditable, editable }: TodoControlProps) => {
   const [newTodo, setNewTodo] = useState<string>('');
+  const [showOptions, setShowOptions] = useState<boolean>(false);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addTodo(newTodo);
     setNewTodo('');
   };
   return (
-    <div className='flex items-center space-x-4 bg-secondary rounded-sm p-2 shadow-sm'>
-      <form onSubmit={onSubmit} className='flex items-center space-x-2 w-full'>
+    <div className='flex flex-col items-center gap-x-4 rounded-sm p-2'>
+      <form onSubmit={onSubmit} className='flex items-center w-full'>
         <Input
           type='text'
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder='Add a new todo'
-          className='w-full'
+          className='w-full rounded-r-none'
         />
-        <Button role='submit'>Add</Button>
+        <Button role='submit' className='rounded-l-none'>
+          Add
+        </Button>
       </form>
-      <Button variant={'destructive'} onClick={reset}>
-        Reset
-      </Button>
-      <Button variant={'default'} onClick={() => setEditable((prev) => !prev)}>
-        <Pencil size={24} />
-      </Button>
+      <Accordion type={'single'} collapsible className='w-full'>
+        <AccordionItem value='options'>
+          <AccordionTrigger
+            onClick={() => setShowOptions((prev) => !prev)}
+            className='flex justify-end text-muted-foreground p-1'
+          >
+            Options
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className='flex gap-2 justify-evenly items-center space-x-4 mt-1 w-full'>
+              <label htmlFor='editable' className='flex items-center gap-2'>
+                Edit Mode
+                <Switch checked={editable} onCheckedChange={() => setEditable((prev) => !prev)} />
+              </label>
+              <Button variant={'ghost'} className='p-1 w-8 h-8' onClick={reset}>
+                <RotateCcw size={16} />
+              </Button>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };
