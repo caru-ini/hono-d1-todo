@@ -14,7 +14,7 @@ const useTodos = () => {
 
   const addTodo = async (text: string) => {
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed.length) return;
     await client.api.todos.$post({ json: { text: trimmed } });
     fetchTodos();
   };
