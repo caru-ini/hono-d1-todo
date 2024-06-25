@@ -20,6 +20,7 @@ const useTodos = () => {
   };
 
   const setDone = async (id: number, done: boolean) => {
+    // @ts-ignore
     await client.api.todos[':id'].$put({ param: { id: id.toString() }, json: { done } });
     fetchTodos();
   };
