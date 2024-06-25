@@ -7,9 +7,6 @@ import { handle as _handle } from 'hono/vercel';
 export const runtime = 'edge';
 
 type Env = {
-  Bindings: {
-    DB: D1Database;
-  };
   Variables: {
     db: DrizzleD1Database;
   };
