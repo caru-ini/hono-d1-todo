@@ -28,6 +28,7 @@ export default defineWorkersProject(async () => {
         reportsDirectory: './coverage',
         reporter: ['text', 'html'],
         include: ['src/app/api/**/*.ts'],
+        exclude: ['src/app/api/**/route.ts'],
       },
     },
   };
