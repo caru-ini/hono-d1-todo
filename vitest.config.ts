@@ -29,6 +29,12 @@ export default defineWorkersProject(async () => {
         reporter: ['text', 'html'],
         include: ['src/app/api/**/*.ts'],
         exclude: ['src/app/api/**/route.ts'],
+        thresholds: {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100,
+        },
       },
     },
   };
