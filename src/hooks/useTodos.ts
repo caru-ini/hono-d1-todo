@@ -16,17 +16,14 @@ const useTodos = () => {
     const trimmed = text.trim();
     if (!trimmed.length) return;
     await client.api.todos.$post({ json: { text: trimmed } });
-    fetchTodos();
   };
 
   const setDone = async (id: number, done: boolean) => {
     await client.api.todos[':id'].$put({ param: { id: id.toString() }, json: { done } });
-    fetchTodos();
   };
 
   const removeTodo = async (id: number) => {
     await client.api.todos[':id'].$delete({ param: { id: id.toString() } });
-    fetchTodos();
   };
 
   const reset = () => {
@@ -35,9 +32,10 @@ const useTodos = () => {
     }
     setTodos([]);
   };
+
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [todos]);
 
   return {
     todos,
