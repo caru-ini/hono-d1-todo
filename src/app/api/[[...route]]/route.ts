@@ -14,10 +14,17 @@ type Env = {
   };
 };
 
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      DB: D1Database;
+    }
+  }
+}
+
 const app = new Hono<Env>().basePath('/api');
 
 app.use(async (c, next) => {
-  // @ts-ignore
   c.set('db', drizzle(process.env.DB));
   await next();
 });
