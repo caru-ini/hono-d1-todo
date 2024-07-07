@@ -5,7 +5,7 @@ import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { z } from 'zod';
 
-import type { Env } from './route';
+import type { Env } from './app';
 
 const schemas = {
   createTodo: z.object({

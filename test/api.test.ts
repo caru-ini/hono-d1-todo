@@ -1,4 +1,4 @@
-import { routes } from '@/app/api/[[...route]]/route';
+import { routes } from '@/app/api/[[...route]]/app';
 import { env } from 'cloudflare:test';
 import { testClient } from 'hono/testing';
 
