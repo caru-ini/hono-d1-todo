@@ -9,6 +9,9 @@ export type Env = {
   Variables: {
     db: DrizzleD1Database;
   };
+  Bindings: {
+    DB: D1Database;
+  };
 };
 
 declare global {
@@ -22,11 +25,11 @@ declare global {
 const app = new Hono<Env>().basePath('/api');
 
 app.use(async (c, next) => {
-  c.set('db', drizzle(process.env.DB));
+  c.set('db', drizzle(process.env.DB || c.env.DB));
   await next();
 });
 
-const routes = app.route('/todos', todo);
+export const routes = app.route('/todos', todo);
 
 export type AppType = typeof routes;
 

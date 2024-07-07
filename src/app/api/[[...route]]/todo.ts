@@ -2,6 +2,7 @@ import { todos } from '@/db/schema';
 import { zValidator } from '@hono/zod-validator';
 import { eq } from 'drizzle-orm';
 import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 import { z } from 'zod';
 
 import type { Env } from './route';
@@ -24,7 +25,8 @@ export const todo = new Hono<Env>()
   .post('/', zValidator('json', schemas.createTodo), async (c) => {
     const params = await c.req.json<typeof todos.$inferSelect>();
     const result = await c.var.db.insert(todos).values(params).execute();
-    return c.json(result);
+    if (!result.success) throw new HTTPException(500, { message: 'Failed to create todo' });
+    return c.json(params);
   })
   .put('/:id', zValidator('json', schemas.updateTodo), async (c) => {
     const id = parseInt(c.req.param('id'));
@@ -34,10 +36,12 @@ export const todo = new Hono<Env>()
       .set({ text: params.text, done: params.done })
       .where(eq(todos.id, id))
       .execute();
-    return c.json(result);
+    if (!result.success) throw new HTTPException(500, { message: 'Failed to update todo' });
+    return c.json(params);
   })
   .delete('/:id', async (c) => {
     const id = parseInt(c.req.param('id'));
     const result = await c.var.db.delete(todos).where(eq(todos.id, id)).execute();
-    return c.json(result);
+    if (!result.success) throw new HTTPException(500, { message: 'Failed to delete todo' });
+    return c.json({});
   });
