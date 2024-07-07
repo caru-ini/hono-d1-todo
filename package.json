@@ -13,7 +13,8 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
     "generate": "drizzle-kit generate",
     "migrate:dev": "pnpm dlx wrangler d1 migrations apply sample-todo --local",
-    "migrate:prod": "pnpm dlx wrangler d1 migrations apply sample-todo --remote"
+    "migrate:prod": "pnpm dlx wrangler d1 migrations apply sample-todo --remote",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
