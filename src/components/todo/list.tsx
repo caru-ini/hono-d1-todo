@@ -4,7 +4,7 @@ import { TodoControl } from './control';
 import { Todo } from './todo';
 
 export const TodoList = () => {
-  const { todos, editable, setEditable, addTodo, setDone, removeTodo, reset } = useTodos();
+  const { todos, editable, setEditable, addTodo, updateTodo, removeTodo, reset } = useTodos();
 
   return (
     <div className='flex max-h-[800px] min-w-[30vw] flex-col gap-2 overflow-y-auto rounded-xl border border-border p-5 shadow-md'>
@@ -13,7 +13,7 @@ export const TodoList = () => {
         <Todo
           key={todo.id}
           {...todo}
-          setDone={setDone}
+          updateTodo={updateTodo}
           removeTodo={removeTodo}
           editable={editable}
         />

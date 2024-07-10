@@ -18,8 +18,17 @@ const useTodos = () => {
     await client.api.todos.$post({ json: { text: trimmed } });
   };
 
-  const setDone = async (id: number, done: boolean) => {
-    await client.api.todos[':id'].$put({ param: { id: id.toString() }, json: { done } });
+  const updateTodo = async (
+    id: number,
+    val: {
+      done?: boolean;
+      text?: string;
+    },
+  ) => {
+    await client.api.todos[':id'].$put({
+      param: { id: id.toString() },
+      json: { done: val.done, text: val.text },
+    });
   };
 
   const removeTodo = async (id: number) => {
@@ -42,7 +51,7 @@ const useTodos = () => {
     editable,
     setEditable,
     addTodo,
-    setDone,
+    updateTodo,
     removeTodo,
     reset,
   };
