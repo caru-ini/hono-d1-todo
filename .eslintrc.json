@@ -13,9 +13,8 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "unused-imports", "eslint-plugin-next-on-pages", "organize-imports"],
+  "plugins": ["prettier", "eslint-plugin-next-on-pages"],
   "rules": {
-    "prettier/prettier": "error",
-    "unused-imports/no-unused-imports": "error"
+    "prettier/prettier": "error"
   }
 }
