@@ -1,4 +1,4 @@
-name = "hono-r2-todo"
+name = "hono-d1-todo"
 compatibility_date = "2024-06-14"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
