@@ -7,10 +7,6 @@
 	"name": "hono-d1-todo",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-12-02",
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./public"
-	},
 	"observability": {
 		"enabled": true
 	},
